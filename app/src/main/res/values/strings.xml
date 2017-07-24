@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Harita</string>
+    <string name="title_filter">Filter</string>
+    <string name="title_cart">Cart</string>
+    <string name="title_shop">Shop</string>
+
+</resources>
