@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder> {
 
-    private ArrayList<Item> itemArrayList = new ArrayList<>();
     int itemWeight;
+    private ArrayList<Item> itemArrayList = new ArrayList<>();
 
     public ShopAdapter(ArrayList<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
@@ -45,14 +45,14 @@ class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder> {
         holder.decWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemArrayList.get(position).setmWeight(itemArrayList.get(position).getWeight()+ 5);
+                itemArrayList.get(position).setWeight(itemArrayList.get(position).getWeight() + 5);
             }
         });
 
         holder.incWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemArrayList.get(position).setmWeight(itemArrayList.get(position).getWeight()- 5);
+                itemArrayList.get(position).setWeight(itemArrayList.get(position).getWeight() - 5);
             }
         });
     }

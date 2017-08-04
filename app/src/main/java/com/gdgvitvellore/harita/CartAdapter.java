@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder> {
 
+    private ArrayList<Item> itemArrayList = new ArrayList<>();
+
     public CartAdapter(ArrayList<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
     }
-
-    private ArrayList<Item> itemArrayList = new ArrayList<>();
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,9 +36,16 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
+    public void onBindViewHolder(ItemViewHolder holder, final int position) {
         holder.priceTextView.setText("₹"+itemArrayList.get(position).getPrice());
         holder.nameTextView.setText(itemArrayList.get(position).getName());
+        holder.removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemArrayList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -53,9 +60,9 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder> {
         public ItemViewHolder(View itemView) {
             super(itemView);
 
-            nameTextView = (TextView) itemView.findViewById(R.id.itemNameCartTV);
-            priceTextView =(TextView) itemView.findViewById(R.id.itemPriceCartTV);
-            removeButton =(ImageButton) itemView.findViewById(R.id.removeItemButton);
+            nameTextView = itemView.findViewById(R.id.itemNameCartTV);
+            priceTextView = itemView.findViewById(R.id.itemPriceCartTV);
+            removeButton = itemView.findViewById(R.id.removeItemButton);
         }
     }
 }

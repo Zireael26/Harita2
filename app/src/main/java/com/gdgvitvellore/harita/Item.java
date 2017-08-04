@@ -7,8 +7,13 @@ package com.gdgvitvellore.harita;
 class Item {
     private String mName;
     private double mRate;
-    private int mWeight;
+    private double mWeight;
     private double mPrice;
+
+    //For Firebase
+    public Item() {
+
+    }
 
     // Constructor for the class
     public Item(String Name, double Rate) {
@@ -16,37 +21,37 @@ class Item {
         this.mRate = Rate;
     }
 
-    String getName() {
-        return this.mName;
+    public String getName() {
+        return mName;
     }
 
-    double getPrice() {
-        return calcPrice();
+    public void setName(String Name) {
+        this.mName = Name;
     }
 
-    int getWeight() {
-        return this.mWeight;
+    public double getRate() {
+        return mRate;
     }
 
-    double getRate() {
-        return this.mRate;
+    public void setRate(double Rate) {
+        this.mRate = Rate;
+    }
+
+    public double getWeight() {
+        return mWeight;
+    }
+
+    public void setWeight(double Weight) {
+        this.mWeight = Weight;
+    }
+
+    public double getPrice() {
+        return mPrice;
     }
 
     private double calcPrice() {
         this.mPrice = ((mWeight * mRate) / 1000);
         return this.mPrice;
-    }
-
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
-    public void setmRate(double mRate) {
-        this.mRate = mRate;
-    }
-
-    public void setmWeight(int mWeight) {
-        this.mWeight = mWeight;
     }
 
 }

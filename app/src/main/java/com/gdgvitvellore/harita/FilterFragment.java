@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 
@@ -18,6 +21,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class FilterFragment extends Fragment {
+
 
     private ArrayList<Item> newItemList = new ArrayList<>();
 
@@ -30,6 +34,7 @@ public class FilterFragment extends Fragment {
         return new FilterFragment();
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +46,18 @@ public class FilterFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_filter, container, false);
 
-        newItemList.add(new Item("Tomato", 20));
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
+        for (Item item : newItemList) {
+            mRef.push().setValue(item);
+        }
+
+        newItemList.add(new Item("Tomato", 13));
         newItemList.add(new Item("Potato", 15));
         newItemList.add(new Item("Onion", 12));
         newItemList.add(new Item("Cabbage", 30));
         newItemList.add(new Item("Carrot", 35));
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.filterRecyclerView);
+        RecyclerView recyclerView = rootView.findViewById(R.id.filterRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FilterAdapter mAdapter = new FilterAdapter(newItemList);
         recyclerView.setAdapter(mAdapter);
