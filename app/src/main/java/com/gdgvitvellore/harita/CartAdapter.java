@@ -18,6 +18,7 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder> {
 
     private ArrayList<Item> itemArrayList = new ArrayList<>();
 
+
     public CartAdapter(ArrayList<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
     }
@@ -37,8 +38,8 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder> {
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, final int position) {
-        holder.priceTextView.setText("₹"+itemArrayList.get(position).getPrice());
-        holder.nameTextView.setText(itemArrayList.get(position).getName());
+        holder.priceTextView.setText("₹" + itemArrayList.get(position).getmPrice());
+        holder.nameTextView.setText(itemArrayList.get(position).getmName());
         holder.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

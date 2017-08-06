@@ -21,32 +21,36 @@ class Item {
         this.mRate = Rate;
     }
 
-    public String getName() {
+    public String getmName() {
         return mName;
     }
 
-    public void setName(String Name) {
-        this.mName = Name;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public double getRate() {
+    public double getmRate() {
         return mRate;
     }
 
-    public void setRate(double Rate) {
-        this.mRate = Rate;
+    public void setmRate(double mRate) {
+        this.mRate = mRate;
     }
 
-    public double getWeight() {
+    public double getmWeight() {
         return mWeight;
     }
 
-    public void setWeight(double Weight) {
-        this.mWeight = Weight;
+    public void setmWeight(double mWeight) {
+        this.mWeight = mWeight;
     }
 
-    public double getPrice() {
-        return mPrice;
+    public double getmPrice() {
+        return calcPrice();
+    }
+
+    public void setmPrice(double mPrice) {
+        this.mPrice = mPrice;
     }
 
     private double calcPrice() {

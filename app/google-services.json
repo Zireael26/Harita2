@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "923043719118",
+    "firebase_url": "https://harita-b1bcd.firebaseio.com",
+    "project_id": "harita-b1bcd",
+    "storage_bucket": "harita-b1bcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923043719118:android:d4fb66f71e85c19c",
+        "android_client_info": {
+          "package_name": "com.gdgvitvellore.harita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923043719118-o95auf4lvctejnm40nbghg5bmci1vcu4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdgvitvellore.harita",
+            "certificate_hash": "38c253880922700aea1de6e5a7caf7cfbab44e23"
+          }
+        },
+        {
+          "client_id": "923043719118-72d9rus59m6pmsom1kddg225ceunj5o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFMs5PbePC8k8tUMOROedGfHFVRmsRPlc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923043719118-72d9rus59m6pmsom1kddg225ceunj5o0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

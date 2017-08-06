@@ -37,18 +37,13 @@ class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ItemViewHolder> {
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
-        holder.nameTextView.setText(itemArrayList.get(position).getName());
+        holder.nameTextView.setText(itemArrayList.get(position).getmName());
         checkBoxState = holder.checkBox.isChecked();
-        holder.editRateET.setVisibility(View.GONE);
 
         if(checkBoxState) {
-            holder.rateTextView.setVisibility(View.VISIBLE);
-            holder.rateTextView.setVisibility(View.GONE);
-            itemArrayList.get(position).setRate(Double.parseDouble(holder.editRateET.getText().toString()));
+            itemArrayList.get(position).setmRate(Double.parseDouble(holder.editRateET.getText().toString()));
         } else {
-            holder.editRateET.setVisibility(View.GONE);
-            holder.rateTextView.setVisibility(View.VISIBLE);
-            holder.rateTextView.setText("₹"+itemArrayList.get(position).getRate());
+            holder.editRateET.setText("₹" + itemArrayList.get(position).getmRate());
         }
     }
 
@@ -58,7 +53,7 @@ class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ItemViewHolder> {
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView, rateTextView;
+        TextView nameTextView;
         EditText editRateET;
         CheckBox checkBox;
 
@@ -67,7 +62,6 @@ class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ItemViewHolder> {
 
             editRateET = itemView.findViewById(R.id.filterRateET);
             nameTextView = itemView.findViewById(R.id.filterNameTV);
-            rateTextView = itemView.findViewById(R.id.filterRateTV);
             checkBox = itemView.findViewById(R.id.filterCheckBox);
         }
     }

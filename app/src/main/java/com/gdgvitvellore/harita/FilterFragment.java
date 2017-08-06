@@ -24,6 +24,9 @@ public class FilterFragment extends Fragment {
 
 
     private ArrayList<Item> newItemList = new ArrayList<>();
+    private DatabaseReference databaseReference;
+    private RecyclerView recyclerView;
+    private FilterAdapter filterAdapter;
 
     public FilterFragment() {
         // Required empty public constructor
@@ -46,10 +49,7 @@ public class FilterFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_filter, container, false);
 
-        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
-        for (Item item : newItemList) {
-            mRef.push().setValue(item);
-        }
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         newItemList.add(new Item("Tomato", 13));
         newItemList.add(new Item("Potato", 15));
@@ -57,10 +57,15 @@ public class FilterFragment extends Fragment {
         newItemList.add(new Item("Cabbage", 30));
         newItemList.add(new Item("Carrot", 35));
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.filterRecyclerView);
+        for (Item i : newItemList) {
+            databaseReference.push().setValue(i);
+        }
+
+
+        recyclerView = rootView.findViewById(R.id.filterRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        FilterAdapter mAdapter = new FilterAdapter(newItemList);
-        recyclerView.setAdapter(mAdapter);
+        filterAdapter = new FilterAdapter(newItemList);
+        recyclerView.setAdapter(filterAdapter);
 
         return rootView;
     }

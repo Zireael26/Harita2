@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder> {
 
-    int itemWeight;
+    int itemWeight, num = 0;
     private ArrayList<Item> itemArrayList = new ArrayList<>();
 
     public ShopAdapter(ArrayList<Item> itemArrayList) {
@@ -38,21 +39,35 @@ class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, final int position) {
-        holder.rateTextView.setText("₹"+itemArrayList.get(position).getPrice());
-        holder.nameTextView.setText(itemArrayList.get(position).getName());
-//        itemArrayList.get(position).setmWeight(Integer.parseInt(holder.weightEditText.getText().toString()));
+    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
+        holder.rateTextView.setText("₹" + itemArrayList.get(position).getmPrice());
+        holder.nameTextView.setText(itemArrayList.get(position).getmName());
         holder.decWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemArrayList.get(position).setWeight(itemArrayList.get(position).getWeight() + 5);
+                itemArrayList.get(position).setmWeight(Double.parseDouble(holder.weightEditText.getText().toString()));
+                itemArrayList.get(position).setmWeight(itemArrayList.get(position).getmWeight() - 5);
+                holder.weightEditText.setText("" + itemArrayList.get(position).getmWeight());
             }
         });
 
         holder.incWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemArrayList.get(position).setWeight(itemArrayList.get(position).getWeight() - 5);
+                itemArrayList.get(position).setmWeight(itemArrayList.get(position).getmWeight() + 5);
+                holder.weightEditText.setText("" + itemArrayList.get(position).getmWeight());
+            }
+        });
+        holder.cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (num % 2 == 1) {
+                    holder.cartButton.setImageResource(R.drawable.ic_add_shopping_cart_black_24dp);
+                    num++;
+                } else {
+                    holder.cartButton.setImageResource(R.drawable.ic_remove_shopping_cart_black_24dp);
+                    num++;
+                }
             }
         });
     }
@@ -66,6 +81,7 @@ class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder> {
         TextView rateTextView, nameTextView;
         EditText weightEditText;
         Button decWeight, incWeight;
+        ImageButton cartButton;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
@@ -75,6 +91,7 @@ class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder> {
             weightEditText = itemView.findViewById(R.id.itemWeightShopET);
             decWeight = itemView.findViewById(R.id.decreaseWeightButton);
             incWeight = itemView.findViewById(R.id.increaseWeightButton);
+            cartButton = itemView.findViewById(R.id.addToCartButton);
         }
     }
 }
