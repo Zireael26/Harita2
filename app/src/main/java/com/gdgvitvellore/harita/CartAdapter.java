@@ -17,7 +17,7 @@ import java.util.ArrayList;
 class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder> {
 
     private ArrayList<Item> itemArrayList = new ArrayList<>();
-
+    private int pos;
 
     public CartAdapter(ArrayList<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
@@ -37,13 +37,14 @@ class CartAdapter extends RecyclerView.Adapter<CartAdapter.ItemViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder holder, final int position) {
-        holder.priceTextView.setText("₹" + itemArrayList.get(position).getmPrice());
-        holder.nameTextView.setText(itemArrayList.get(position).getmName());
+    public void onBindViewHolder(ItemViewHolder holder, int position) {
+        pos = position;
+        holder.priceTextView.setText("₹" + itemArrayList.get(pos).getmPrice());
+        holder.nameTextView.setText(itemArrayList.get(pos).getmName());
         holder.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemArrayList.remove(position);
+                itemArrayList.remove(pos);
                 notifyDataSetChanged();
             }
         });

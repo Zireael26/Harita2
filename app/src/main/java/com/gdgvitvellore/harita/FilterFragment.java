@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,11 +27,12 @@ import java.util.ArrayList;
 public class FilterFragment extends Fragment {
 
 
+    View rootView;
     private ArrayList<Item> newItemList = new ArrayList<>();
     private DatabaseReference databaseReference;
     private RecyclerView recyclerView;
     private FilterAdapter filterAdapter;
-
+    private String key;
     public FilterFragment() {
         // Required empty public constructor
     }
@@ -47,25 +52,51 @@ public class FilterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_filter, container, false);
+        rootView = inflater.inflate(R.layout.fragment_filter, container, false);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Full List");
 
-        newItemList.add(new Item("Tomato", 13));
-        newItemList.add(new Item("Potato", 15));
-        newItemList.add(new Item("Onion", 12));
-        newItemList.add(new Item("Cabbage", 30));
-        newItemList.add(new Item("Carrot", 35));
+        // Attach a listener to read the data at our posts reference
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
+                    Item item = itemSnapshot.getValue(Item.class);
+                    newItemList.add(item);
+                }
+                Log.v("onCreate method", "says Hello");
 
-        for (Item i : newItemList) {
-            databaseReference.push().setValue(i);
-        }
+                recyclerView = rootView.findViewById(R.id.filterRecyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                filterAdapter = new FilterAdapter(newItemList);
+                filterAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(filterAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.v("Read Status", "The read failed: " + databaseError.getCode());
+            }
+        });
+
+//        newItemList.add(new Item("Tomato", 0));
+//        newItemList.add(new Item("Potato", 0));
+//        newItemList.add(new Item("Onion", 0));
+//        newItemList.add(new Item("Cabbage", 0));
+//        newItemList.add(new Item("Carrot", 0));
+//        newItemList.add(new Item("Broccoli", 0));
+//        newItemList.add(new Item("Beetroot", 0));
+//        newItemList.add(new Item("Grapes", 0));
+//        newItemList.add(new Item("Apples", 0));
+//
+//        for (Item i : newItemList) {
+//            key = databaseReference.push().getKey();
+//            i.setuID(key);
+//            databaseReference.child(key).setValue(i);
+//        }
 
 
-        recyclerView = rootView.findViewById(R.id.filterRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        filterAdapter = new FilterAdapter(newItemList);
-        recyclerView.setAdapter(filterAdapter);
 
         return rootView;
     }

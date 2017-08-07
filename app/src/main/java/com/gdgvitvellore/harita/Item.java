@@ -9,6 +9,7 @@ class Item {
     private double mRate;
     private double mWeight;
     private double mPrice;
+    private String uID;
 
     //For Firebase
     public Item() {
@@ -58,4 +59,11 @@ class Item {
         return this.mPrice;
     }
 
+    public String getuID() {
+        return uID;
+    }
+
+    public void setuID(String uID) {
+        this.uID = uID;
+    }
 }
